@@ -1,0 +1,3 @@
+GitHub repo URL: <FILL_AFTER_PUSH>
+Vercel deployment URL: <FILL_AFTER_DEPLOY>
+
