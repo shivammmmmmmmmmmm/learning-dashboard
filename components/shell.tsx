@@ -15,11 +15,13 @@ interface Props {
   hasError: boolean
 }
 
-const pages: Record<string, React.ReactNode> = {
-  courses: <CoursesPage />,
-  analytics: <AnalyticsPage />,
-  profile: <ProfilePage />,
-  settings: <SettingsPage />,
+function ActivePage({ active, courses, hasError }: { active: string; courses: Course[]; hasError: boolean }) {
+  if (active === "dashboard") return <Dashboard courses={courses} hasError={hasError} />
+  if (active === "courses") return <CoursesPage />
+  if (active === "analytics") return <AnalyticsPage />
+  if (active === "profile") return <ProfilePage />
+  if (active === "settings") return <SettingsPage />
+  return null
 }
 
 export default function Shell({ courses, hasError }: Props) {
@@ -37,11 +39,7 @@ export default function Shell({ courses, hasError }: Props) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            {active === "dashboard" ? (
-              <Dashboard courses={courses} hasError={hasError} />
-            ) : (
-              pages[active]
-            )}
+            <ActivePage active={active} courses={courses} hasError={hasError} />
           </motion.div>
         </AnimatePresence>
       </main>
